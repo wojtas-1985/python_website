@@ -1,0 +1,5 @@
+notes
+.vscode/settings.json
+demo.log
+.vscode/*
+__pycache__/
