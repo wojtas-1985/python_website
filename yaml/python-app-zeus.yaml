@@ -21,8 +21,8 @@ spec:
         app: zeus-dep
     spec:
       containers:
-      - image: singharunk/flask-portfolio:latest
-        name: flask-portfolio:latest
+      - image: singharunk/portfolio:latest
+        name: portfolio:latest
         ports:
         - containerPort: 5000
         resources:
