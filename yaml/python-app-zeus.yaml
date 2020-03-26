@@ -1,15 +1,12 @@
-# Deployment file for python-app
-#
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
   labels:
     app: zeus-dep
-    env: dev
-  name: portfolio
+  name: zeus-dep
 spec:
   replicas: 2
-  progressDeadlineSeconds: 30
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,16 +15,14 @@ spec:
   selector:
     matchLabels:
       app: zeus-dep
-      env: dev
   template:
     metadata:
       labels:
         app: zeus-dep
-        env: dev
     spec:
       containers:
-      - image: arun161087/flask-portfolio:latest
-        name: portfolio
+      - image: singharunk/flask-portfolio:latest
+        name: flask-portfolio:latest
         ports:
         - containerPort: 5000
         resources:
