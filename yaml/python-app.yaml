@@ -1,5 +1,4 @@
-# Example hello world app deployment that fails
-# because of an incorrectly configured readiness probe.
+# Deployment file for python-app
 #
 apiVersion: apps/v1
 kind: Deployment
