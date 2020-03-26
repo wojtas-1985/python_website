@@ -21,8 +21,8 @@ spec:
         app: zeus-dep
     spec:
       containers:
-      - image: singharunk/portfolio:latest
-        name: portfolio:latest
+      - image: "singharunk/portfolio"
+        name: portfolio
         ports:
         - containerPort: 5000
         resources:
