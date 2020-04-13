@@ -1,7 +1,7 @@
-def CONTAINER_NAME="python-app"
+def CONTAINER_NAME="portfolio"
 def CONTAINER_TAG="latest"
-// Update User Account Details over here
-def DOCKER_HUB_USER="xxxxx"
+// Update Docker hub User Account Details over here
+def DOCKER_HUB_USER="singharunk"
 def HTTP_PORT="80"
 def STOP_C="docker ps -a -q"
 
@@ -30,6 +30,9 @@ node {
         runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
     }
 
+    stage('Run in GKE App'){
+        runGKE()
+    }
 }
 
 def imagePrune(containerName){
@@ -46,7 +49,7 @@ def imagePrune(containerName){
 def imageBuild(containerName, tag){
     echo "Images Present :- "
     sh "docker images"
-    sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
+    sh "docker build -t $containerName:$tag  -t $containerName ."
     sh "docker images"
     echo "Image build complete"
 }
@@ -62,4 +65,12 @@ def runApp(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
     sh "docker run -d --rm -p $httpPort:5000 --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
+}
+
+def runGKE(){
+
+    sh "kubectl apply -f yaml/python-app-zeus.yaml"
+    sh "kubectl apply -f yaml/python-app-service.yaml"
+    sh "kubectl get pods -o wide"
+    sh "kubectl get nodes -o wide"
 }
