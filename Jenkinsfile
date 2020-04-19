@@ -1,7 +1,7 @@
 def CONTAINER_NAME="portfolio"
 def CONTAINER_TAG="latest"
 // Update Docker hub User Account Details over here
-def DOCKER_HUB_USER="singharunk"
+def DOCKER_HUB_USER="xxxxxxx"
 def HTTP_PORT="80"
 def STOP_C="docker ps -a -q"
 
@@ -72,5 +72,5 @@ def runGKE(){
     sh "kubectl apply -f yaml/python-app-zeus.yaml"
     sh "kubectl apply -f yaml/python-app-service.yaml"
     sh "kubectl get pods -o wide"
-    sh "kubectl get nodes -o wide"
+    sh "kubectl get services -o wide"
 }
